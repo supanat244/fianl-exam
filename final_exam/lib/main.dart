@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // บังคับแสดงผลในแนวตั้งสำหรับอุปกรณ์มือถือ
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -29,9 +28,6 @@ class MainApp extends StatelessWidget {
   }
 }
 
-// ==========================================
-// SCREEN 1: ระบบคำนวณรายได้และค่าตอบแทน (ธีม Indigo)
-// ==========================================
 class IncomeCalculatorScreen extends StatefulWidget {
   const IncomeCalculatorScreen({super.key});
 
@@ -61,7 +57,6 @@ class _IncomeCalculatorScreenState extends State<IncomeCalculatorScreen> {
       return;
     }
 
-    // 1. ค่าคอมมิชชัน
     double commissionPercent = 0.0;
     if (salary < 20000) {
       commissionPercent = 0.05;
@@ -72,13 +67,11 @@ class _IncomeCalculatorScreenState extends State<IncomeCalculatorScreen> {
     }
     final double commission = sales * commissionPercent;
 
-    // 2. โบนัสยอดขาย 200,000 ขึ้นไป
     double bonus = 0.0;
     if (sales >= 200000) {
       bonus = 3000.0;
     }
 
-    // 3. เงินพิเศษเพิ่มเติม (กรณี TC-03: เงินเดือน > 50,000 และยอดขาย >= 300,000)
     double extraBonus = 0.0;
     if (salary > 50000 && sales >= 300000) {
       extraBonus = 5000.0;
@@ -91,7 +84,6 @@ class _IncomeCalculatorScreenState extends State<IncomeCalculatorScreen> {
     IconData icon;
     String performanceLevel;
 
-    // กำหนดสีและระดับผลงาน (Bronze / Silver / Gold)
     if (totalIncome < 30000) {
       themeColor = Colors.deepOrange.shade700;
       backgroundColor = Colors.orange.shade50;
@@ -228,7 +220,7 @@ class _IncomeCalculatorScreenState extends State<IncomeCalculatorScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450), // บีบทรงมือถือแนวตั้งบน Web
+          constraints: const BoxConstraints(maxWidth: 450),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -284,9 +276,6 @@ class _IncomeCalculatorScreenState extends State<IncomeCalculatorScreen> {
   }
 }
 
-// ==========================================
-// SCREEN 2: ประเมินค่าใช้จ่าย (ธีม Teal สีเขียวอมฟ้า)
-// ==========================================
 class ExpenseEvaluationScreen extends StatefulWidget {
   const ExpenseEvaluationScreen({super.key});
 
@@ -315,7 +304,6 @@ class _ExpenseEvaluationScreenState extends State<ExpenseEvaluationScreen> {
 
     final double percentage = (expense / income) * 100;
 
-    // เงื่อนไขใหม่: <= 50% ให้เยี่ยมมีเงินออม (ไม่เตือน) / > 50% ให้คำเตือน
     if (percentage <= 50) {
       _showDialogAlert(
         title: 'ประเมินเยี่ยม',
@@ -413,11 +401,11 @@ class _ExpenseEvaluationScreenState extends State<ExpenseEvaluationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Screen 2: ประเมินค่าใช้จ่าย'),
-        backgroundColor: Colors.teal.shade100, // เปลี่ยนสีแถบด้านบนหน้า 2
+        backgroundColor: Colors.teal.shade100,
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 450), // บีบทรงมือถือแนวตั้งบน Web
+          constraints: const BoxConstraints(maxWidth: 450),
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -451,7 +439,7 @@ class _ExpenseEvaluationScreenState extends State<ExpenseEvaluationScreen> {
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    backgroundColor: Colors.teal, // ปุ่มสี Teal หน้า 2
+                    backgroundColor: Colors.teal,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
